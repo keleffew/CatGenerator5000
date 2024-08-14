@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background: #f5f5f5;
+        }
+        #generate-cat-button {
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #generate-cat-button:hover {
+            background-color: #e03e00;
+        }
+        #cat-image-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #cat-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>Cat Generator</h1>
+    <button id="generate-cat-button">Generate Cat 🐱</button>
+    <div id="cat-image-container">
+        <img id="cat-image" src="" alt="" style="display: none;">
+    </div>
+    <script>
+        document.getElementById('generate-cat-button').addEventListener('click', function() {
+            fetch('/get_cat')
+                .then(response => response.json())
+                .then(data => {
+                    const catImage = document.getElementById('cat-image');
+                    catImage.src = data.url;
+                    catImage.style.display = 'block';
+                });
+        });
+    </script>
+</body>
+</html>
